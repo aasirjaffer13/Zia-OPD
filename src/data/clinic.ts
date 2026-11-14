@@ -8,9 +8,10 @@ export const clinic = {
   tagline: 'YOUR HEALTH, OUR PRIORITY',
   doctor: {
     name: 'Dr. Zia Ul Islam',
-    qualifications: ['MBBS', 'DNB General Medicine', 'MD'],
-    qualificationsLine: 'MBBS · DNB General Medicine · MD',
-    qualificationsPipe: 'MBBS | DNB General Medicine | MD',
+    designation: 'Physician',
+    qualifications: ['MBBS', 'DNB General Medicine'],
+    qualificationsLine: 'MBBS · DNB General Medicine',
+    qualificationsPipe: 'MBBS | DNB General Medicine',
   },
   address: {
     street: 'Iqbal Market',
@@ -33,7 +34,7 @@ export const clinic = {
       "Consult Dr. Zia Ul Islam at Dr. Zia's OPD Clinic, conveniently located at Iqbal Market, Kupwara.",
     locationLabel: 'Iqbal Market, Kupwara',
   },
-  notice: 'Please call the clinic before visiting to confirm consultation availability.',
+  notice: 'Please confirm consultation availability by contacting the clinic before visiting.',
   disclaimer:
     'Information on this website is for general guidance. Please contact the clinic to confirm consultation availability.',
   whatsappIntro:
@@ -125,8 +126,9 @@ export const services: Service[] = [
 ];
 
 /* --------------------------------------------------------------------------
-   Weekly OPD schedule
-   Source: regular weekly timetable. No special/one-off appointment dates.
+   Weekly OPD schedule (all seven days)
+   Source: doctor-confirmed weekly timetable (Nov 2026).
+   Thursday and Friday are OFF. No special/one-off appointment dates.
    -------------------------------------------------------------------------- */
 
 export type SessionPeriod = 'morning' | 'evening' | 'day';
@@ -142,6 +144,8 @@ export interface DaySchedule {
   day: string;
   shortDay: string;
   sessions: DaySession[];
+  /** True when the clinic holds no OPD on this day. */
+  off?: true;
 }
 
 const MORNING: DaySession = { period: 'morning', time: '08:00 AM – 09:45 AM' };
@@ -151,6 +155,8 @@ export const weeklySchedule: DaySchedule[] = [
   { index: 1, day: 'Monday', shortDay: 'Mon', sessions: [MORNING] },
   { index: 2, day: 'Tuesday', shortDay: 'Tue', sessions: [EVENING] },
   { index: 3, day: 'Wednesday', shortDay: 'Wed', sessions: [MORNING] },
+  { index: 4, day: 'Thursday', shortDay: 'Thu', sessions: [], off: true },
+  { index: 5, day: 'Friday', shortDay: 'Fri', sessions: [], off: true },
   {
     index: 6,
     day: 'Saturday',
@@ -183,7 +189,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'What are the regular OPD timings?',
     answer:
-      'Monday, Wednesday and Saturday morning: 08:00 AM – 09:45 AM. Tuesday and Saturday evening: 04:30 PM – 06:30 PM. Sunday: 08:00 AM – 03:00 PM. Please call the clinic before visiting to confirm availability.',
+      'Monday, Wednesday and Saturday morning: 08:00 AM – 09:45 AM. Tuesday and Saturday evening: 04:30 PM – 06:30 PM. Sunday: 08:00 AM – 03:00 PM. Thursday and Friday are off. Please call the clinic before visiting to confirm availability.',
   },
   {
     question: 'How can I contact the clinic?',

@@ -41,8 +41,14 @@ export function Footer() {
               </span>
             </span>
           </div>
-          <p className="mt-4 max-w-xs text-[0.92rem] leading-relaxed text-white/70">
-            {clinic.doctor.name} &mdash; {clinic.doctor.qualificationsLine}
+          <p className="mt-4 max-w-xs text-[0.95rem] font-semibold leading-relaxed text-white">
+            {clinic.doctor.name}
+          </p>
+          <p className="mt-1.5 text-[0.7rem] font-bold tracking-[0.18em] text-gold uppercase">
+            {clinic.doctor.designation}
+          </p>
+          <p className="mt-1 max-w-xs text-[0.85rem] leading-relaxed text-white/65">
+            {clinic.doctor.qualificationsLine}
           </p>
           <address className="mt-3 max-w-xs text-[0.92rem] leading-relaxed text-white/70 not-italic">
             {clinic.address.lines.map((line) => (
@@ -121,7 +127,9 @@ export function Footer() {
                 <span aria-hidden="true" className="text-white/40">
                   —
                 </span>{' '}
-                {group.sessions.map((s) => s.time).join(' & ')}
+                {group.sessions.length > 0
+                  ? group.sessions.map((s) => s.time).join(' & ')
+                  : 'OFF'}
               </li>
             ))}
           </ul>

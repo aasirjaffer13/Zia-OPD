@@ -114,7 +114,10 @@ export function Hero() {
               <p className="font-serif text-lg leading-tight font-semibold text-navy">
                 {clinic.doctor.name}
               </p>
-              <p className="mt-1 text-[0.72rem] font-semibold tracking-[0.14em] text-forest uppercase">
+              <p className="mt-1.5 text-[0.7rem] font-bold tracking-[0.18em] text-forest uppercase">
+                {clinic.doctor.designation}
+              </p>
+              <p className="mt-1 text-[0.68rem] font-semibold tracking-[0.12em] text-ink/65 uppercase">
                 {clinic.doctor.qualificationsLine}
               </p>
             </div>

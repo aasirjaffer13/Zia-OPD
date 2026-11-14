@@ -67,8 +67,9 @@ $x = 260
 $g.DrawString("Dr. Zia's OPD Clinic", $serif, $brushWhite, $x, 200)
 $g.DrawString("Medical Consultation  $dot  Kupwara, Jammu & Kashmir", $sans, $brushIvory, $x + 4, 285)
 $g.DrawLine($rulePen, $x + 4, 345, $x + 164, 345)
-$g.DrawString("MBBS  $dot  DNB General Medicine  $dot  MD", $sansSemi, $brushGold, $x + 4, 372)
-$g.DrawString("Iqbal Market, Kupwara  $dot  +91 7889892181", $small, $brushIvory, $x + 4, 425)
+$g.DrawString("Dr. Zia Ul Islam  $dot  PHYSICIAN", $sansSemi, $brushGold, $x + 4, 372)
+$g.DrawString("MBBS  $dot  DNB General Medicine", $sansSemi, $brushIvory, $x + 4, 410)
+$g.DrawString("Iqbal Market, Kupwara  $dot  +91 7889892181", $small, $brushIvory, $x + 4, 452)
 
 $out = Join-Path $PSScriptRoot 'public\og-image.png'
 $g.Dispose()

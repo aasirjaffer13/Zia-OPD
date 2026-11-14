@@ -108,6 +108,9 @@ export function DoctorProfile() {
             <p className="mt-5 font-serif text-[1.6rem] leading-tight font-semibold text-forest">
               {clinic.doctor.name}
             </p>
+            <p className="mt-2 text-[0.8rem] font-bold tracking-[0.2em] text-navy/75 uppercase">
+              {clinic.doctor.designation}
+            </p>
           </Reveal>
 
           <Reveal delay={140}>
@@ -122,8 +125,9 @@ export function DoctorProfile() {
           <Reveal delay={200}>
             <div className="mt-6 max-w-xl space-y-4 text-[1.02rem] leading-relaxed text-ink">
               <p>
-                {clinic.doctor.name} is the consulting physician at {clinic.name}, located at{' '}
-                {clinic.address.singleLine}. He consults with patients as per the clinic&rsquo;s
+                {clinic.doctor.name} is a physician at {clinic.name}, located at{' '}
+                {clinic.address.singleLine}. Patients can visit the clinic for medical
+                consultation across a range of common health concerns, according to the
                 weekly OPD schedule.
               </p>
               <p>

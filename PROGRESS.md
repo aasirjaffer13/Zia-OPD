@@ -43,7 +43,7 @@ still be open — close it.
 
 ## Spec-compliance pass (this session, after reconciliation)
 All required copy from the brief is now exact:
-- **About** h2 → "Meet Your Doctor" + name line + `MBBS | DNB General Medicine | MD` chip.
+- **About** h2 → "Meet Your Doctor" + name line + designation `PHYSICIAN` + `MBBS | DNB General Medicine` chip.
 - **Services** h2 → "Medical Consultation" + supporting "Medical consultation for a range of common health conditions."
 - **Timings** h2 → "Clinic Hours & OPD Schedule" + supporting "Plan your visit according to the regular consultation schedule."
 - **Enquiry** h2 → "Plan Your Visit" (eyebrow now "Appointment Enquiry"); field labels renamed to spec:
@@ -57,17 +57,32 @@ All required copy from the brief is now exact:
   in project files** (grep audit) — no poster/special timing anywhere.
 - `npm run build` + `npm run lint` pass; `vite preview` served HTML/og-image/favicon → 200.
 
-## Thursday & Friday removed (user request)
-Thursday and Friday are now **completely absent** from the site — no rows, no mentions:
-- `clinic.ts`: Thu/Fri rows deleted from `weeklySchedule`; `UNCONFIRMED`, `unconfirmedNote`,
-  `unconfirmedDays`, `isDayUnconfirmed` removed; FAQ answers no longer reference them.
-- `OPDSchedule.tsx`: unconfirmed-cells branch + second reading note removed.
-- `AppointmentEnquiry.tsx`: "— call to confirm" option suffix, inline unconfirmed notice and
-  WhatsApp "no confirmed timing" note removed (day list derives from `weeklySchedule`).
-- `Footer.tsx`: "No confirmed timing available" fallback removed (all groups have sessions).
-- `DoctorProfile.tsx`: expectation bullet reworded.
-- Verified by grep: zero `Thursday|Friday|Thu|Fri|confirmed timing|unconfirmed` matches in `src/`.
-  JSON-LD already listed only confirmed hours — unchanged.
+## Doctor corrections + real photo (latest update round)
+Applied from the doctor's supplied WhatsApp screenshots (weekly timetable photo, promo poster,
+clinic photograph of the doctor):
+- **Qualifications**: `MD` removed everywhere → `MBBS | DNB General Medicine`.
+  New designation **Physician** added (`clinic.doctor.designation`), shown uppercase "PHYSICIAN"
+  in the Hero name plate, About section and Footer. "Consultant" / "Consulting Physician"
+  removed (About intro rewritten per brief). Grep-verified: zero `MD|Consultant|consulting`
+  matches in `src/` + `index.html`.
+- **Schedule**: all **seven days** displayed; Thursday & Friday marked **OFF** (neutral grey
+  pill + subtle grey row tint, `off: true` in `weeklySchedule`). Saturday keeps BOTH sessions
+  (morning + evening). Available sessions use subtle forest-green pills
+  (`border-forest/25 bg-forest/[0.07]`, Sunrise/Sunset/Sun icons distinguish sessions);
+  legend now includes OFF and is visible on mobile too. Notice text updated to:
+  "Please confirm consultation availability by contacting the clinic before visiting."
+- **Photo**: `public/images/doctor.jpg` (880×1100, 4:5, ~119 KB) cropped from the supplied
+  clinic photograph by `make-photo.ps1` — no WhatsApp UI, no special dates. Used by Hero and
+  About (Portrait emblem fallback intact).
+- **SEO**: meta/OG/Twitter descriptions + JSON-LD description updated (Physician, no MD);
+  JSON-LD `jobTitle: "Physician"`; openingHoursSpecification unchanged (already correct).
+  `og-image.png` regenerated via `make-og.ps1` → "Dr. Zia Ul Islam · PHYSICIAN /
+  MBBS · DNB General Medicine" (navy corner pixel verified 20,43,69).
+- **Enquiry form**: day dropdown lists all 7 days; OFF days labelled "Thursday — OFF";
+  selecting one offers the Flexible session option.
+- FAQ timings answer now states "Thursday and Friday are off."
+- **Not used from the poster**: special appointment date "Sunday 23 August 2026" and its
+  8:30 AM–4:00 PM timing — deliberately excluded everywhere (grep-verified).
 
 ## Notes on concurrent edits (19:17–19:19, another session/user)
 - `src/data/clinic.ts`: icon key `'lungs'` → **`'wind'`** (lucide-react 1.x has no `Lung` icon) — adopted in `Services.tsx`.

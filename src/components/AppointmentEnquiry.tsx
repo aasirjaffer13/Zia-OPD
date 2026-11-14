@@ -316,7 +316,7 @@ export function AppointmentEnquiry() {
                       <option value="">Select a day…</option>
                       {weeklySchedule.map((day) => (
                         <option key={day.index} value={String(day.index)}>
-                          {day.day}
+                          {day.off ? `${day.day} — OFF` : day.day}
                         </option>
                       ))}
                     </select>

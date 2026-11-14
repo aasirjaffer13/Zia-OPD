@@ -21,15 +21,15 @@ const periodIcon: Record<SessionPeriod, typeof Sunrise> = {
 };
 
 const chipTone: Record<SessionPeriod, string> = {
-  morning: 'bg-forest/10 text-forest',
-  evening: 'bg-navy/10 text-navy-soft',
-  day: 'bg-gold/25 text-[#8a6d33]',
+  morning: 'bg-forest/15 text-forest',
+  evening: 'bg-forest/15 text-forest',
+  day: 'bg-forest/15 text-forest',
 };
 
 const iconTone: Record<SessionPeriod, string> = {
   morning: 'text-forest',
-  evening: 'text-navy-soft',
-  day: 'text-[#8a6d33]',
+  evening: 'text-forest',
+  day: 'text-forest',
 };
 
 const legend: { period: SessionPeriod; label: string }[] = [
@@ -80,7 +80,7 @@ export function OPDSchedule() {
                 <Clock size={16} className="text-forest" aria-hidden="true" />
                 This week&rsquo;s schedule
               </h3>
-              <ul className="hidden flex-wrap gap-2 sm:flex" aria-hidden="true">
+              <ul className="flex flex-wrap gap-2" aria-hidden="true">
                 {legend.map(({ period, label }) => {
                   const Icon = periodIcon[period];
                   return (
@@ -93,6 +93,9 @@ export function OPDSchedule() {
                     </li>
                   );
                 })}
+                <li className="flex items-center gap-1.5 rounded-full border border-line bg-[#e9ebe6] px-3 py-1.5 text-[0.75rem] font-bold tracking-[0.1em] text-ink/55 uppercase">
+                  OFF
+                </li>
               </ul>
             </div>
 
@@ -123,7 +126,7 @@ export function OPDSchedule() {
                     <tr
                       key={day.index}
                       className={`border-b border-line/80 last:border-b-0 ${
-                        isToday ? 'bg-gold/15' : ''
+                        isToday ? 'bg-gold/15' : day.off ? 'bg-[#eff0ec]' : ''
                       }`}
                     >
                       <th
@@ -146,13 +149,18 @@ export function OPDSchedule() {
                         )}
                       </th>
                       <td className="py-4 pr-5 pl-1 align-top">
-                        <ul className="flex flex-wrap gap-2">
+                        {day.off ? (
+                          <span className="inline-flex items-center rounded-full border border-line bg-[#e9ebe6] px-4 py-1.5 text-[0.78rem] font-bold tracking-[0.14em] text-ink/55 uppercase">
+                            OFF
+                          </span>
+                        ) : (
+                          <ul className="flex flex-wrap gap-2">
                             {day.sessions.map((session) => {
                               const Icon = periodIcon[session.period];
                               return (
                                 <li
                                   key={session.period}
-                                  className="flex items-center gap-2.5 rounded-full border border-line bg-white px-3.5 py-1.5 text-[0.83rem] font-medium text-navy"
+                                  className="flex items-center gap-2.5 rounded-full border border-forest/25 bg-forest/[0.07] px-3.5 py-1.5 text-[0.83rem] font-medium text-navy"
                                 >
                                   <span
                                     aria-hidden="true"
@@ -163,12 +171,13 @@ export function OPDSchedule() {
                                     <Icon size={13} strokeWidth={2.2} />
                                   </span>
                                   {periodLabel[session.period]}
-                                  <span aria-hidden="true" className="h-3.5 w-px bg-line" />
+                                  <span aria-hidden="true" className="h-3.5 w-px bg-forest/30" />
                                   <span className="font-semibold text-ink">{session.time}</span>
                                 </li>
                               );
                             })}
                           </ul>
+                        )}
                       </td>
                     </tr>
                   );
