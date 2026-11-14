@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design system — Navy + Forest Green
+   ========================================================================== */
+@theme {
+  --color-navy: #142b45;
+  --color-navy-soft: #1e3a5c;
+  --color-forest: #174d3a;
+  --color-forest-deep: #0f3b2c;
+  --color-ivory: #f7f8f5;
+  --color-gold: #c5a66a;
+  --color-ink: #344054;
+  --color-line: #e4e8e3;
+  --color-danger: #b42318;
+
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Space for the sticky mobile action bar */
+  @media (max-width: 767px) {
+    body {
+      padding-bottom: 4.75rem;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    color: var(--color-navy);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  section[id] {
+    scroll-margin-top: 5.25rem;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-navy);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Skip link */
+  .skip-link {
+    position: fixed;
+    top: -100%;
+    left: 1rem;
+    z-index: 100;
+    background: var(--color-navy);
+    color: #fff;
+    padding: 0.65rem 1.1rem;
+    border-radius: 0.375rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Eyebrow label — dark gold so it stays legible on light backgrounds;
+     use .eyebrow-gold over navy, where the bright brand gold reads well. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8a6d33;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: var(--color-gold);
+  }
+  .eyebrow-gold {
+    color: var(--color-gold);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    border-radius: 0.4rem;
+    padding: 0.95rem 1.5rem;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn-primary {
+    background: var(--color-forest);
+    color: #fff;
+    border: 1px solid var(--color-forest);
+  }
+  .btn-primary:hover {
+    background: var(--color-forest-deep);
+    border-color: var(--color-forest-deep);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--color-navy);
+    border: 1px solid var(--color-navy);
+  }
+  .btn-outline:hover {
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .btn-light {
+    background: var(--color-ivory);
+    color: var(--color-navy);
+    border: 1px solid var(--color-ivory);
+  }
+  .btn-light:hover {
+    background: #fff;
+  }
+
+  .btn-ghost-light {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+  }
+  .btn-ghost-light:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Form controls */
+  .field-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    margin-bottom: 0.45rem;
+  }
+
+  .field-input {
+    width: 100%;
+    height: 2.9rem;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: 0.4rem;
+    padding: 0 0.9rem;
+    font-size: 0.975rem;
+    color: var(--color-ink);
+    transition:
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+  textarea.field-input {
+    height: auto;
+    min-height: 6.5rem;
+    padding: 0.7rem 0.9rem;
+    resize: vertical;
+    line-height: 1.55;
+  }
+  .field-input::placeholder {
+    color: #98a2b3;
+  }
+  .field-input:focus {
+    outline: none;
+    border-color: var(--color-forest);
+    box-shadow: 0 0 0 3px rgba(23, 77, 58, 0.14);
+  }
+  .field-input[aria-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+  .field-input[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
+  }
+
+  .field-error {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.83rem;
+    font-weight: 500;
+    color: var(--color-danger);
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* Mobile menu entry */
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .menu-in {
+    animation: menu-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-in {
+      animation: none;
+    }
+  }
+
+  /* Faint grid used behind the location card */
+  .grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(20, 43, 69, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(20, 43, 69, 0.055) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+}
