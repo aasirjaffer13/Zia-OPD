@@ -1,4 +1,4 @@
-import { Clock, Info, MessageCircle, Phone, Sun, Sunrise, Sunset } from 'lucide-react';
+import { Info, MessageCircle, Phone, Sun, Sunrise, Sunset } from 'lucide-react';
 import {
   clinic,
   defaultWhatsAppLink,
@@ -76,10 +76,6 @@ export function OPDSchedule() {
         <Reveal delay={120} className="mt-10">
           <div className="overflow-hidden rounded-sm bg-ivory text-ink shadow-[0_40px_80px_-50px_rgba(0,0,0,0.75)]">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-white px-5 py-4">
-              <h3 className="flex items-center gap-2.5 font-serif text-base font-semibold text-navy">
-                <Clock size={16} className="text-forest" aria-hidden="true" />
-                This week&rsquo;s schedule
-              </h3>
               <ul className="flex flex-wrap gap-2" aria-hidden="true">
                 {legend.map(({ period, label }) => {
                   const Icon = periodIcon[period];

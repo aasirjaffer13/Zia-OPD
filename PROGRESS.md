@@ -82,6 +82,9 @@ clinic photograph of the doctor):
 - **Enquiry form**: day dropdown lists all 7 days; OFF days labelled "Thursday — OFF";
   selecting one offers the Flexible session option.
 - FAQ timings answer now states "Thursday and Friday are off."
+- **Schedule is standing, not weekly**: the card no longer says "This week's schedule" —
+  these are fixed timings, identical every week (no rotation/date logic; `todayIndex()` only
+  highlights today's row). Subtitle keeps "regular consultation schedule".
 - **Not used from the poster**: special appointment date "Sunday 23 August 2026" and its
   8:30 AM–4:00 PM timing — deliberately excluded everywhere (grep-verified).
 

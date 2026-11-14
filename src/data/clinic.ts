@@ -126,9 +126,10 @@ export const services: Service[] = [
 ];
 
 /* --------------------------------------------------------------------------
-   Weekly OPD schedule (all seven days)
-   Source: doctor-confirmed weekly timetable (Nov 2026).
-   Thursday and Friday are OFF. No special/one-off appointment dates.
+   Weekly OPD schedule (all seven days) — standing schedule, the same every week.
+   Source: doctor-confirmed timetable (Nov 2026). These timings do NOT rotate or
+   change from week to week; Thursday and Friday are OFF. No special/one-off
+   appointment dates.
    -------------------------------------------------------------------------- */
 
 export type SessionPeriod = 'morning' | 'evening' | 'day';
