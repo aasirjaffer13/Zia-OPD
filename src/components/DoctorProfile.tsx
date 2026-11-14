@@ -6,7 +6,7 @@ import { Reveal } from './Reveal';
 const expectations = [
   'Call before you visit — consultation availability can change from day to day.',
   'Bring any previous prescriptions and test reports you would like reviewed.',
-  'Check the OPD Timings for the day you plan to visit — Thursday and Friday have no confirmed timing.',
+  'Check the OPD Timings section for the day you plan to visit before making the trip.',
 ] as const;
 
 export function DoctorProfile() {

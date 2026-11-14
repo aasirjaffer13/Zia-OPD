@@ -127,7 +127,6 @@ export const services: Service[] = [
 /* --------------------------------------------------------------------------
    Weekly OPD schedule
    Source: regular weekly timetable. No special/one-off appointment dates.
-   Thursday & Friday have NO confirmed timing — never label them as "closed".
    -------------------------------------------------------------------------- */
 
 export type SessionPeriod = 'morning' | 'evening' | 'day';
@@ -143,20 +142,15 @@ export interface DaySchedule {
   day: string;
   shortDay: string;
   sessions: DaySession[];
-  /** Text shown when no timing has been confirmed */
-  unconfirmedNote?: string;
 }
 
 const MORNING: DaySession = { period: 'morning', time: '08:00 AM – 09:45 AM' };
 const EVENING: DaySession = { period: 'evening', time: '04:30 PM – 06:30 PM' };
-const UNCONFIRMED = 'No confirmed timing available';
 
 export const weeklySchedule: DaySchedule[] = [
   { index: 1, day: 'Monday', shortDay: 'Mon', sessions: [MORNING] },
   { index: 2, day: 'Tuesday', shortDay: 'Tue', sessions: [EVENING] },
   { index: 3, day: 'Wednesday', shortDay: 'Wed', sessions: [MORNING] },
-  { index: 4, day: 'Thursday', shortDay: 'Thu', sessions: [], unconfirmedNote: UNCONFIRMED },
-  { index: 5, day: 'Friday', shortDay: 'Fri', sessions: [], unconfirmedNote: UNCONFIRMED },
   {
     index: 6,
     day: 'Saturday',
@@ -170,15 +164,6 @@ export const weeklySchedule: DaySchedule[] = [
     sessions: [{ period: 'day', time: '08:00 AM – 03:00 PM' }],
   },
 ];
-
-/** Day names that currently have no confirmed OPD timing. */
-export const unconfirmedDays = weeklySchedule
-  .filter((d) => d.sessions.length === 0)
-  .map((d) => d.day);
-
-export function isDayUnconfirmed(day: string): boolean {
-  return unconfirmedDays.includes(day);
-}
 
 /* --------------------------------------------------------------------------
    FAQ
@@ -198,7 +183,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'What are the regular OPD timings?',
     answer:
-      'Monday, Wednesday and Saturday morning: 08:00 AM – 09:45 AM. Tuesday and Saturday evening: 04:30 PM – 06:30 PM. Sunday: 08:00 AM – 03:00 PM. For Thursday and Friday no timing has been confirmed, so please call the clinic to check availability.',
+      'Monday, Wednesday and Saturday morning: 08:00 AM – 09:45 AM. Tuesday and Saturday evening: 04:30 PM – 06:30 PM. Sunday: 08:00 AM – 03:00 PM. Please call the clinic before visiting to confirm availability.',
   },
   {
     question: 'How can I contact the clinic?',
@@ -213,7 +198,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'Should I call before visiting?',
     answer:
-      'Yes. Please call the clinic before visiting to confirm consultation availability for that day, especially on Thursday and Friday, for which no timing has been confirmed.',
+      'Yes. Please call the clinic before visiting to confirm consultation availability for that day.',
   },
   {
     question: 'How can I enquire about an appointment?',

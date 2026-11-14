@@ -146,8 +146,7 @@ export function OPDSchedule() {
                         )}
                       </th>
                       <td className="py-4 pr-5 pl-1 align-top">
-                        {day.sessions.length > 0 ? (
-                          <ul className="flex flex-wrap gap-2">
+                        <ul className="flex flex-wrap gap-2">
                             {day.sessions.map((session) => {
                               const Icon = periodIcon[session.period];
                               return (
@@ -170,12 +169,6 @@ export function OPDSchedule() {
                               );
                             })}
                           </ul>
-                        ) : (
-                          <p className="flex items-center gap-2 text-[0.88rem] font-medium text-ink/75">
-                            <Info size={15} className="shrink-0 text-ink/50" aria-hidden="true" />
-                            {day.unconfirmedNote}
-                          </p>
-                        )}
                       </td>
                     </tr>
                   );
@@ -193,19 +186,6 @@ export function OPDSchedule() {
                 <span>
                   <strong className="font-semibold text-navy">Today&rsquo;s row is a reference</strong>{' '}
                   — please call the clinic to confirm today&rsquo;s availability before visiting.
-                </span>
-              </p>
-              <p className="mt-2.5 flex gap-2.5">
-                <span
-                  aria-hidden="true"
-                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-forest"
-                />
-                <span>
-                  <strong className="font-semibold text-navy">
-                    &ldquo;No confirmed timing available&rdquo;
-                  </strong>{' '}
-                  means the timing has not been published — it does not mean the clinic is closed.
-                  Please call to check.
                 </span>
               </p>
             </div>

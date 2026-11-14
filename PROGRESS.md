@@ -24,12 +24,12 @@ still be open — close it.
 | `src/App.tsx` | Done — skip-link, Navbar, main (Hero → About → Services → Timings → Enquiry → Location → Contact → FAQ), Footer, FloatingActions |
 | `src/components/DoctorProfile.tsx` | Done — #about, white bg: photo + corner accent, quick-facts dl (location/phone/OPD), quals badge, truthful copy, "What to expect" list, CTAs |
 | `src/components/Services.tsx` | Done — #services, ivory bg: 6 cards, icon map `gauge/heart/wind/stethoscope/utensils/brain`, hover lift + gold border, footnote with tel link |
-| `src/components/OPDSchedule.tsx` | Done — #timings, **navy bg + ivory schedule card**: table with day rows, Sunrise/Sunset/Sun session chips, "Today" row gold-highlighted + badge, Thu/Fri = "No confirmed timing available" (never "closed"), two reading-notes (today = reference only; no-confirmed-timing ≠ closed), legend, notice box, Call Now + WhatsApp buttons |
-| `src/components/AppointmentEnquiry.tsx` | Done — #enquiry, white bg: name / Indian mobile `^[6-9]\d{9}$` (normalises +91/91/0/spaces) / day select (Thu/Fri = "— call to confirm" + inline call note) / dynamic session radios (built from the chosen day; Thu/Fri → "Any time — please suggest") / optional notes, `noValidate` custom validation + `role="alert"` errors + focus-first-invalid, loading → popup opened inside the click gesture → confirmation panel that clearly says **NOT booked until the clinic confirms**, blocked-popup fallback button, sticky navy "Prefer to call?" aside |
+| `src/components/OPDSchedule.tsx` | Done — #timings, **navy bg + ivory schedule card**: table with day rows (Mon/Tue/Wed/Sat/Sun only), Sunrise/Sunset/Sun session chips, "Today" row gold-highlighted + badge, reading-note (today = reference only), legend, notice box, Call Now + WhatsApp buttons |
+| `src/components/AppointmentEnquiry.tsx` | Done — #enquiry, white bg: name / Indian mobile `^[6-9]\d{9}$` (normalises +91/91/0/spaces) / day select (5 days) / dynamic session radios (built from the chosen day; always includes Flexible) / optional notes, `noValidate` custom validation + `role="alert"` errors + focus-first-invalid, loading → popup opened inside the click gesture → confirmation panel that clearly says **NOT booked until the clinic confirms**, blocked-popup fallback button, sticky navy "Prefer to call?" aside |
 | `src/components/Location.tsx` | Done — #location, ivory bg: address card, Google Maps **search** + **directions** links (no fabricated pin/embed), copy-address with clipboard fallback + `aria-live`, typographic map panel |
 | `src/components/Contact.tsx` | Done — #contact, white bg: call card (tel), WhatsApp card (wa.me prefilled), address strip → #location, disclaimer |
 | `src/components/FAQ.tsx` | Done — #faq, ivory bg: accessible accordion (`button aria-expanded/aria-controls`, `role="region"`, `hidden`), single-open, call strip |
-| `src/components/Footer.tsx` | Done — navy: emblem, tagline, tel/WhatsApp, quick links, services, **auto-grouped weekly timings** (derived from `weeklySchedule`, Thu/Fri = "No confirmed timing available"), disclaimer + dynamic year |
+| `src/components/Footer.tsx` | Done — navy: emblem, tagline, tel/WhatsApp, quick links, services, **auto-grouped weekly timings** (derived from `weeklySchedule`), disclaimer + dynamic year |
 | `src/components/FloatingActions.tsx` | Done — desktop: back-to-top (appears after 500 px) + WhatsApp float; mobile: sticky Call + WhatsApp bottom bar with `env(safe-area-inset-bottom)` |
 | `src/components/Emblem.tsx` | Done — removed unused `tone` prop (TS6133); cross/pulse paths refined (external edit adopted) |
 | `src/components/Reveal.tsx` | Done — reduced-motion now handled via lazy state init (no setState-in-effect warning) |
@@ -48,8 +48,7 @@ All required copy from the brief is now exact:
 - **Timings** h2 → "Clinic Hours & OPD Schedule" + supporting "Plan your visit according to the regular consultation schedule."
 - **Enquiry** h2 → "Plan Your Visit" (eyebrow now "Appointment Enquiry"); field labels renamed to spec:
   Patient Name / Phone Number / Preferred Consultation Day / Brief Enquiry (optional);
-  session options now always include **Flexible** (`Flexible — any suitable session or time`,
-  or `Flexible — please suggest a suitable timing` for Thu/Fri).
+  session options now always include **Flexible** (`Flexible — any suitable session or time`).
 - **Footer** brand column now shows `Dr. Zia Ul Islam` + quals + full address (was missing).
 - Tailwind v4 `!important` prefix syntax (`!py-3`, `!rounded-none`) removed from Navbar +
   FloatingActions — plain utilities win over component classes via cascade layers anyway.
@@ -57,6 +56,18 @@ All required copy from the brief is now exact:
   `.eyebrow-gold`, `.rounded-none` etc.; **only the three approved time ranges exist anywhere
   in project files** (grep audit) — no poster/special timing anywhere.
 - `npm run build` + `npm run lint` pass; `vite preview` served HTML/og-image/favicon → 200.
+
+## Thursday & Friday removed (user request)
+Thursday and Friday are now **completely absent** from the site — no rows, no mentions:
+- `clinic.ts`: Thu/Fri rows deleted from `weeklySchedule`; `UNCONFIRMED`, `unconfirmedNote`,
+  `unconfirmedDays`, `isDayUnconfirmed` removed; FAQ answers no longer reference them.
+- `OPDSchedule.tsx`: unconfirmed-cells branch + second reading note removed.
+- `AppointmentEnquiry.tsx`: "— call to confirm" option suffix, inline unconfirmed notice and
+  WhatsApp "no confirmed timing" note removed (day list derives from `weeklySchedule`).
+- `Footer.tsx`: "No confirmed timing available" fallback removed (all groups have sessions).
+- `DoctorProfile.tsx`: expectation bullet reworded.
+- Verified by grep: zero `Thursday|Friday|Thu|Fri|confirmed timing|unconfirmed` matches in `src/`.
+  JSON-LD already listed only confirmed hours — unchanged.
 
 ## Notes on concurrent edits (19:17–19:19, another session/user)
 - `src/data/clinic.ts`: icon key `'lungs'` → **`'wind'`** (lucide-react 1.x has no `Lung` icon) — adopted in `Services.tsx`.
@@ -69,7 +80,7 @@ All required copy from the brief is now exact:
 1. **Photos still missing.** Poster + timetable not yet in this folder. Once present:
    - Crop doctor's photo from poster → `public/images/doctor.jpg` (PowerShell GDI+ or similar).
      Until then `Portrait` shows the emblem fallback panel (works, but the hero looks better with the photo).
-   - **Verify all times + Thu/Fri against the timetable photo** (currently from `clinic.ts`).
+   - **Verify all times against the timetable photo** (currently from `clinic.ts`).
    - Confirm the poster's special/one-off appointment date is NOT used anywhere (it is not).
 2. **Manual QA** — `npm run dev`, then check on mobile + desktop:
    - nav scroll-spy + mobile menu (Escape/scroll-lock), skip-link

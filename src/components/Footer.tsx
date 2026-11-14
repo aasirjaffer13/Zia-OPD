@@ -9,7 +9,7 @@ import {
 } from '../data/clinic';
 import { Emblem } from './Emblem';
 
-/** Group consecutive days that share the same sessions (Mon+Wed, Thu+Fri…). */
+/** Group consecutive days that share the same sessions. */
 const timingGroups: { days: string[]; signature: string; sessions: DaySession[] }[] = [];
 for (const day of weeklySchedule) {
   const signature = day.sessions.map((s) => `${s.period}:${s.time}`).join('|');
@@ -121,9 +121,7 @@ export function Footer() {
                 <span aria-hidden="true" className="text-white/40">
                   —
                 </span>{' '}
-                {group.sessions.length > 0
-                  ? group.sessions.map((s) => s.time).join(' & ')
-                  : 'No confirmed timing available'}
+                {group.sessions.map((s) => s.time).join(' & ')}
               </li>
             ))}
           </ul>

@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import {
   CircleCheckBig,
-  Info,
   LoaderCircle,
   MessageCircle,
   Phone,
@@ -69,8 +68,6 @@ function buildMessage(
   ];
 
   if (values.notes.trim()) lines.push(`Notes: ${values.notes.trim()}`);
-  if (day && day.sessions.length === 0)
-    lines.push(`Note: No confirmed timing is available for ${day.day}.`);
 
   lines.push(
     '',
@@ -320,26 +317,12 @@ export function AppointmentEnquiry() {
                       {weeklySchedule.map((day) => (
                         <option key={day.index} value={String(day.index)}>
                           {day.day}
-                          {day.sessions.length === 0 ? ' — call to confirm' : ''}
                         </option>
                       ))}
                     </select>
                     {errors.day && (
                       <span id="err-day" className="field-error" role="alert">
                         {errors.day}
-                      </span>
-                    )}
-                    {selectedDay && selectedDay.sessions.length === 0 && (
-                      <span className="mt-2.5 flex items-start gap-2.5 border border-gold/45 bg-gold/10 p-3 text-[0.85rem] leading-relaxed text-navy">
-                        <Info size={15} className="mt-0.5 shrink-0 text-[#8a6d33]" aria-hidden="true" />
-                        No confirmed timing is available for {selectedDay.day}. Please{' '}
-                        <a
-                          href={clinic.phone.tel}
-                          className="font-semibold underline decoration-gold decoration-2 underline-offset-2"
-                        >
-                          call the clinic
-                        </a>{' '}
-                        to confirm availability.
                       </span>
                     )}
                   </div>
