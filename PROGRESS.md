@@ -66,8 +66,9 @@ clinic photograph of the doctor):
   removed (About intro rewritten per brief). Grep-verified: zero `MD|Consultant|consulting`
   matches in `src/` + `index.html`.
 - **Schedule**: all **seven days** displayed; Thursday & Friday marked **OFF** (neutral grey
-  pill + subtle grey row tint, `off: true` in `weeklySchedule`). Saturday keeps BOTH sessions
-  (morning + evening). Available sessions use subtle forest-green pills
+  pill + subtle grey row tint, `off: true` in `weeklySchedule`). Saturday is **evening only**
+  (04:30 PM – 06:30 PM — doctor's latest instruction; morning session removed). Available
+  sessions use subtle forest-green pills
   (`border-forest/25 bg-forest/[0.07]`, Sunrise/Sunset/Sun icons distinguish sessions);
   legend now includes OFF and is visible on mobile too. Notice text updated to:
   "Please confirm consultation availability by contacting the clinic before visiting."

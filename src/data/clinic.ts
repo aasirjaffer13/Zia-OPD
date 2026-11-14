@@ -161,7 +161,7 @@ export const weeklySchedule: DaySchedule[] = [
     index: 6,
     day: 'Saturday',
     shortDay: 'Sat',
-    sessions: [MORNING, EVENING],
+    sessions: [EVENING],
   },
   {
     index: 0,
@@ -189,7 +189,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'What are the regular OPD timings?',
     answer:
-      'Monday, Wednesday and Saturday morning: 08:00 AM – 09:45 AM. Tuesday and Saturday evening: 04:30 PM – 06:30 PM. Sunday: 08:00 AM – 03:00 PM. Thursday and Friday are off. Please call the clinic before visiting to confirm availability.',
+      'Monday and Wednesday morning: 08:00 AM – 09:45 AM. Tuesday and Saturday evening: 04:30 PM – 06:30 PM. Sunday: 08:00 AM – 03:00 PM. Thursday and Friday are off. Please call the clinic before visiting to confirm availability.',
   },
   {
     question: 'How can I contact the clinic?',
@@ -199,7 +199,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'Does the clinic offer morning and evening consultations?',
     answer:
-      'Yes. Morning consultations are held on Monday, Wednesday and Saturday from 08:00 AM to 09:45 AM. Evening consultations are held on Tuesday and Saturday from 04:30 PM to 06:30 PM. Sunday consultations run from 08:00 AM to 03:00 PM.',
+      'Yes. Morning consultations are held on Monday and Wednesday from 08:00 AM to 09:45 AM. Evening consultations are held on Tuesday and Saturday from 04:30 PM to 06:30 PM. Sunday consultations run from 08:00 AM to 03:00 PM.',
   },
   {
     question: 'Should I call before visiting?',
